@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence>
+
+   <persistence-unit name="SolverUnit">
+		<jta-data-source>jdbc/solverData</jta-data-source>
+		<properties>
+		<property name="toplink.ddl-generation" value="create-tables"/>
+		</properties>
+	</persistence-unit>
+
+</persistence>

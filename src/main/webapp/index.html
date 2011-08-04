@@ -1,0 +1,281 @@
+<html>
+<head>
+	<title>UP Project Grp 3</title>
+	<style>
+		body { font-family: Calibri, Helvetica, Arial; font-size: 10pt; }
+	</style>	
+<link href="resources/main.css" rel="stylesheet" type="text/css">	
+
+<script type="text/javascript" src="./resources/js/jquery-1.4.2.js"></script>
+<script>
+	function op(type) {
+		url = 'rest/networksolver/'+type;
+		$.ajax({
+			  url: url,
+			  success: function(data) {
+			   	alert(data);
+			  }
+			});
+	}
+
+
+</script>	
+
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<script type="text/javascript"><!--
+
+$(document).ready(function(){
+
+	$('.expandButton').click(function() {
+		  $(this).next('.collapse').slideToggle('fast', function() {
+		    // Animation complete.
+		  });
+		});
+
+	$(".collapse").hide();
+
+	
+	$('.btn_Regular').click(function() {
+		var button = $(this);
+		var msg = $(this).parent().next('.message');
+
+
+
+		
+		
+		msg.html("<p>Submitted</p>")
+			.hide()
+			.fadeIn(50, function() {
+				msg.fadeOut(3000,function() {
+					});
+			});
+	});
+
+	//LoadNetwork Function
+	$('#btn_LoadNetwork').click(function() {
+		$(this).hide();
+		var form = $(this).parent;
+		var msg = $(this).parent().next('.message');
+		msg.html("<img id='loading' src='resources/images/ajax-loader.gif' />");
+		  
+		var url = $("input#url_LoadNetwork").val(); 
+		var dataString = 'url='+ url;
+		
+		//alert (url); //return false;
+		$.ajax({
+			type: "POST",
+			url: "rest/manage/network/loadnetwork",
+			data: dataString,
+			success: function() {
+				msg.html("<p>Network successfully created.</p>")
+					.hide()
+					.fadeIn(1500, function() {
+					        //$('#message').append("<img id='checkmark' src='images/check.png' />");
+				});
+			}  
+		  });
+		  return false;		  
+	});
+
+	//LoadNetworkInputs Function
+	$('#btn_LoadNetworkInputs').click(function() {
+		$(this).hide();
+		var form = $(this).parent;
+		var msg = $(this).parent().next('.message');
+		msg.html("<img id='loading' src='resources/images/ajax-loader.gif' />");
+		  
+		var url = $("input#url_LoadNetworkInputs").val(); 
+		var dataString = 'url='+ url;
+		
+		//alert (url); //return false;
+		$.ajax({
+			type: "POST",
+			url: "rest/manage/network/loadnetworkinputs",
+			data: dataString,
+			success: function() {
+				msg.html("<p>Network inputs successfully loaded.</p>")
+					.hide()
+					.fadeIn(1500, function() {
+					        //$('#message').append("<img id='checkmark' src='images/check.png' />");
+				});
+			}  
+		  });
+		  return false;		  
+	});
+	
+	//SolveNetwork Function
+	$('#btn_SolveNetwork').click(function() {
+		$(this).hide();
+		var form = $(this).parent;
+		var msg = $(this).parent().next('.message');
+		msg.html("<img id='loading' src='resources/images/ajax-loader.gif' />");
+		  
+		var name = $("input#name_SolveNetwork").val(); 
+		var dataString = 'name='+ name;
+		
+		//alert (name); //return false;
+		$.ajax({
+			type: "POST",
+			url: "rest/solve/network/solvenetwork",
+			data: dataString,
+			success: function() {
+				msg.html("<p>Solver ran; generated some dummy data.</p>")
+		.append("<a href='./rest/solve/network/getsolution/solution.xml'>View Solution XML File</a>")
+					.hide()
+					.fadeIn(1500, function() {
+					        //$('#message').append("<img id='checkmark' src='images/check.png' />");
+				});
+			}  
+		  });
+		  return false;		  
+	});
+
+
+	
+});
+
+
+--></script>
+
+
+</head>
+<body>
+<!-- 
+	<h3>hello RESTful world</h3>
+	<input type="button" onclick="op('sup')" value="Does this shit work?" />
+-->
+<div class = "main">
+	
+	<h1 class="centered">Union Pacific - Group 3</h1>
+	<hr />
+	<div>
+		<h3>1. Load Network</h3>
+	</div>
+	<div class = "formBlock">
+		<form method="POST" action = "">
+		<label> XML URL </label> <br />
+		<input type="text" name="url" id = "url_LoadNetwork" size="166" value="http://cse-cig.unl.edu:8080/upproject/rest/networkGenerator?groupId=3" /><br />
+		<input type="submit" class="btn" id = "btn_LoadNetwork" value="Load"/>
+		</form>
+		<div class="message"></div>
+		<div class="clear"></div>
+	</div>
+	
+	<div>
+		<h3>2. Load Network Inputs</h3>
+	</div>
+	<div class = "formBlock">
+		<form method="POST" action = "">
+		<label> XML URL </label> <br />
+		<input type="text" name="url" id = "url_LoadNetworkInputs" size="166" value="http://cse-cig.unl.edu:8080/upproject/rest/inputGenerator?groupId=3" /><br />
+		<input type="submit" class="btn" id = "btn_LoadNetworkInputs" value="Load"/>
+		</form>
+		<div class="message"></div>
+		<div class="clear"></div>	
+	</div>
+	
+	<div>
+		<h3>3. Run Solver</h3>
+	</div>
+	<div class = "formBlock">
+		<form method="POST" action = "">
+		<label> Network Name </label> <br />
+		<input type="text" name="name" id = "name_SolveNetwork" size="166" value="demoNetwork" /><br />
+		<input type="submit" class="btn" id = "btn_SolveNetwork"  value="Execute"/>
+		</form>
+		<div class="message"></div>
+		<div class="clear"></div>	
+	</div>
+	
+
+	
+	
+<br /><br /><br />
+	
+<hr />
+	<h3 class="centered">Test Tools</h3>
+	<div class="expandButton">
+	<h3> Add Network</h3>
+	</div>
+	<div class = "formBlock collapse">
+		<form method="POST" action = "rest/manage/network/create">
+			<label>Name</label> <br />
+			
+			<input type="text" name="name"/><br />
+			<label>Max Cars Per Train</label><br />
+			
+			
+			<input type="text" name="maxCarsPerTrain"/><br />
+			<label>Non Fuel Cost Per Mile</label><br />
+			<input type="text" name="nonFuelCostPerMile"/><br />
+			<label>Fuel Cost Per Mile</label><br />
+			<input type="text" name="fuelCostPerMile"/><br />
+			<label>Car Cost Per Mile</label><br />
+			<input type="text" name="carCostPerMile"/><br />	
+			<input type="submit" class="btn btn_Regular"/>
+		</form>
+		<div class="message"></div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="expandButton">
+	<h3> Delete Network</h3>
+	</div>
+	<div class = "formBlock collapse">
+		<form method="POST" action = "rest/manage/network/delete">
+			<label> Name</label> <br />
+			<input type="text" value = "demoNetwork" name="name"/> <br />
+			<input type="submit" class="btn btn_Regular"/>
+		</form>
+		<div class="message"></div>
+		<div class="clear"></div>
+	</div>
+		
+		<div class="expandButton">
+		<h3> Add Node</h3>
+		</div>
+		<div class = "formBlock collapse">
+		<form method="POST" action = "rest/manage/network/addnode">
+			<label>Network Name</label><br />
+			<input type="text" name="network"/><br />
+			<label>ID</label><br />
+			<input type="text" name="id"/><br />
+			<label>Name</label><br />
+			<input type="text" name="name"/><br />
+			<label>Latitude</label><br />
+			<input type="text" name="latitude"/><br />
+			<label>Longitude</label><br />
+			<input type="text" name="longitude"/><br />
+			<label>Max Cars</label><br />
+			<input type="text" name="maxCars"/><br />	
+			<input type="submit" class="btn btn_Regular"/>
+			<div class="message"></div>
+			<div class="clear"></div>
+		</form>
+		</div>
+		<div class="expandButton">
+		<h3> Add Arc</h3>
+		</div>
+		<div class = "formBlock collapse">
+		<form method="POST" action = "rest/manage/network/addarc">
+			<label>Network Name</label><br />
+			<input type="text" name="network"/><br />
+			<label>startNode</label><br />
+			<input type="text" name="startNode"/><br />
+			<label>endNode</label><br />
+			<input type="text" name="endNode"/><br />
+			<label>Max Trains</label><br />
+			<input type="text" name="maxTrains"/><br />
+			<label>Distance</label><br />
+			<input type="text" name="distnace"/><br />
+			<label>Fuel Adjustment Factor</label><br />
+			<input type="text" name="fuelAdjustFactor"/><br />	
+			<input type="submit" class="btn btn_Regular"/>
+			<div class="message"></div>
+			<div class="clear"></div>
+		</form>
+		</div>
+</div>
+	
+</body>
+</html>

@@ -1,0 +1,4 @@
+#Property file for referencing the local glassfish install for test cases
+#Tue Feb 15 20:44:00 CST 2011
+#Supply the path to your own Glassfish installation after the '=' sign below
+org.glassfish.ejb.embedded.glassfish.installation.root=/Users/Jake/glassfishv3/glassfish/

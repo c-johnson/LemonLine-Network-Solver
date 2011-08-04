@@ -1,0 +1,95 @@
+body
+{
+	
+	background: url(images/bg.jpg) top left repeat;
+	background-color:#F0F3F7;
+	font-family: Verdana, Arial, Helvetica, SunSans-Regular;
+}
+
+div.clear
+{
+	clear: both;
+}
+
+
+div.main
+{
+	width: 976px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:#F0F3F7;
+	margin-top: 32px;
+	padding: 32px;
+	border: 4px solid;
+        border-color: #327CCB;
+}
+
+div.formBlock {
+		margin-left: auto;
+		margin-right: auto;
+		padding: 10px; 
+        margin: 10px 10px 10px 0px;
+        background:#FFFFFF;
+        border: 2px solid;
+        border-color: #327CCB;
+        color: #327CCB;
+	}
+	
+div.expandButton {
+		cursor: hand;
+		cursor: pointer;
+	}
+	
+input.btn { 
+	  color:#FFFFFF; 
+	  background-color:#327CCB; 
+	  border:2px solid; 
+	  border-color: #327CCB; 
+	  margin-top: 12px;
+	  float: left;
+	  		height: 24px;
+	  
+
+}
+
+.message{
+		float: left;
+		display: block;
+		border-color: #327CCB;
+		margin: 0;
+		height: 24px;
+	}
+.message p {
+		padding: 0px;
+		margin: 0px;
+		margin-left: 5px;
+	}
+
+/* Shadow Effects */
+
+/* End SHadow Effects */
+
+.centered {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;	
+		text-align: center;
+	}
+
+div.startHidden {
+	}
+
+
+
+div.formBlock left {
+		float: left;
+	}
+	
+div.formBlock right {
+		float: right;
+	}
+
+
+
+
+
